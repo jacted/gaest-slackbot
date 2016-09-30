@@ -10,7 +10,6 @@ module.exports = function (app) {
   app.post('/slack', function (req, res) {
     // Check token
     if (req.body.token === config.slack.token) {
-    
       // Lowercase text
       let text = req.body.text.toLowerCase()
 
