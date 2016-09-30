@@ -22,8 +22,7 @@ var fetchRooms = (locationID, price, limit, page, capacity) => {
 
         // Filter
         var filteredRooms = rooms.filter((el) => {
-          return el.attributes.hourly_price <= price,
-          el.attributes.capacity >= capacity
+          return el.attributes.hourly_price <= price && el.attributes.capacity >= capacity
         })
 
         // Pagination
