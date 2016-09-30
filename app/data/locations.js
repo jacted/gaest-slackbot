@@ -6,43 +6,37 @@ var request = require('superagent')
 var locations = []
 
 var fetchLocations = () => {
-
-    request
+  request
     .get('https://api.gaest.com/locations')
     .end((err, res) => {
+      if (err) {
 
-        for (let v of res.body.data) { 
-            locations.push({
-                name: v.attributes.name
-                , slug: v.attributes.slug
-                , id: v.id 
-            })
+      } else {
+        for (let v of res.body.data) {
+          locations.push({
+            name: v.attributes.name,
+            slug: v.attributes.slug,
+            id: v.id
+          })
         }
-
+      }
     })
-
 }
 
 var getLocationId = (text) => {
+  return new Promise((resolve, reject) => {
+    for (let v of locations) {
+      // Check on name & slug
+      if (text.indexOf(v.name.toLowerCase()) !== -1 || text.indexOf(v.slug.toLowerCase()) !== -1) {
+        return resolve(+v.id)
+      }
+    }
 
-    return new Promise((resolve, reject) => {
-
-        for (let v of locations) {
-
-            // Check on name & slug
-            if(text.indexOf(v.name.toLowerCase()) !== -1 || text.indexOf(v.slug.toLowerCase()) !== -1) {
-                return resolve(+v.id)
-            }
-
-        }
-
-       return reject('NOT_FOUND')
-
-    })
-
+    return reject('NOT_FOUND')
+  })
 }
 
 module.exports = {
-    fetchLocations: fetchLocations
-    , getLocationId: getLocationId
+  fetchLocations: fetchLocations,
+  getLocationId: getLocationId
 }

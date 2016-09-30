@@ -1,3 +1,3 @@
 'use strict'
 
-var server = require('./app/server');
+require('./app/server')

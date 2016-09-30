@@ -1,19 +1,19 @@
 'use strict'
 
-// BASE SETUP 
+// BASE SETUP
 // ====================================================
-var express      = require('express')
-    , app        = express()
-    , bodyParser = require('body-parser')
-    , cors       = require('cors')
-    , config     = require('./config')
-    , loc        = require('./data/locations')
+var express = require('express')
+var app = express()
+var bodyParser = require('body-parser')
+var cors = require('cors')
+var config = require('./config')
+var loc = require('./data/locations')
 
-// Cors 
+// Cors
 // ====================================================
 app.use(cors())
 
-// Setup bodyparser 
+// Setup bodyparser
 // ====================================================
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
