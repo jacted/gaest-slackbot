@@ -1,0 +1,31 @@
+{
+  "name": "gaest-slackbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha tests --recursive",
+    "test:watch": "mocha tests --recursive --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jacted/gaest-slackbot.git"
+  },
+  "author": "Jacob",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jacted/gaest-slackbot/issues"
+  },
+  "homepage": "https://github.com/jacted/gaest-slackbot#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cors": "^2.8.1",
+    "express": "^4.14.0",
+    "superagent": "^2.3.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.0.2",
+    "supertest": "^2.0.0"
+  }
+}
