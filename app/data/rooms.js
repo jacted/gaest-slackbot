@@ -2,7 +2,7 @@
 
 var request = require('superagent')
 
-var fetchRooms = (locationID, price, limit, page) => {
+var fetchRooms = (locationID, price, limit, page, capacity) => {
   price *= 100
 
   return new Promise((resolve, reject) => {
@@ -17,21 +17,22 @@ var fetchRooms = (locationID, price, limit, page) => {
 
         // Sort rooms by price
         rooms.sort(function (a, b) {
-          return parseFloat(a.attributes.hourly_price) - parseFloat(b.attributes.hourly_price)
+          return a.attributes.hourly_price - b.attributes.hourly_price || a.attributes.capacity - b.attributes.capacity
+        })
+
+        // Filter
+        var filteredRooms = rooms.filter((el) => {
+          return el.attributes.hourly_price <= price,
+          el.attributes.capacity >= capacity
         })
 
         // Pagination
         let fromLimit = (page - 1) * limit
         let toLimit = (page) * limit
 
-        rooms = res.body.data.slice(fromLimit, toLimit)
+        rooms = filteredRooms.slice(fromLimit, toLimit)
 
-        // Filter on price
-        let filterRooms = rooms.filter((el) => {
-          return el.attributes.hourly_price <= price
-        })
-
-        return resolve(filterRooms)
+        return resolve(rooms)
       })
   })
 }

@@ -17,15 +17,17 @@ module.exports = function (app) {
       var price = filter.getPrice(text)
       var locationID = loc.getLocationId(text)
       var page = filter.getPage(text)
+      var capacity = filter.getCapacity(text)
 
-      Promise.all([limit, price, locationID, page])
+      Promise.all([limit, price, locationID, page, capacity])
         .then((values) => {
           limit = values[0]
           price = values[1]
           locationID = values[2]
           page = values[3]
+          capacity = values[4]
 
-          roomsData.fetchRooms(locationID, price, limit, page)
+          roomsData.fetchRooms(locationID, price, limit, page, capacity)
             .then((rooms) => {
               if (rooms.length === 0) {
                 res.send({

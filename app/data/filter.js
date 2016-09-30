@@ -12,6 +12,18 @@ var getLimit = (text) => {
   })
 }
 
+var getCapacity = (text) => {
+  return new Promise((resolve, reject) => {
+    var match = text.match(/([0-9]+) person/)
+
+    if (match) {
+      resolve(+match[1])
+    }
+
+    return resolve(0)
+  })
+}
+
 var getPrice = (text) => {
   return new Promise((resolve, reject) => {
     var match = text.match(/([0-9]+)\s*kr/)
@@ -38,6 +50,7 @@ var getPage = (text) => {
 
 module.exports = {
   getLimit: getLimit,
+  getCapacity: getCapacity,
   getPrice: getPrice,
   getPage: getPage
 }
